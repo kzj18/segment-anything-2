@@ -53,8 +53,6 @@ conda activate x-anylabeling-sam2
 
 git clone git@github.com:CVHub520/segment-anything-2.git $HOME/Projects/Labeling/segment-anything-2
 cd $HOME/Projects/Labeling/segment-anything-2
-source /path/to/switch-cuda.sh 12.1
-python setup.py build_ext --inplace
 pip install -e .
 
 git clone git@github.com:CVHub520/X-AnyLabeling.git $HOME/Projects/Labeling/X-AnyLabeling
@@ -62,6 +60,11 @@ pip install -r $HOME/Projects/Labeling/X-AnyLabeling/requirements.txt
 
 cd $HOME/Projects/Labeling/X-AnyLabeling
 python anylabeling/app.py
+
+cd $HOME/Projects/Labeling/segment-anything-2
+source /path/to/switch-cuda.sh 12.1
+python setup.py clean --all
+python setup.py build_ext --inplace
 ```
 
 ## Getting Started
