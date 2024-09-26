@@ -17,7 +17,7 @@
 SAM 2 needs to be installed first before use. The code requires `python>=3.10`, as well as `torch>=2.3.1` and `torchvision>=0.18.1`. Please follow the instructions [here](https://pytorch.org/get-started/locally/) to install both PyTorch and TorchVision dependencies. You can install SAM 2 on a GPU machine using:
 
 ```bash
-git clone https://github.com/facebookresearch/segment-anything-2.git & cd segment-anything-2
+git clone git@github.com:kzj18/segment-anything-2.git & cd segment-anything-2
 
 conda env create -f environment.yml
 
@@ -41,6 +41,28 @@ Note:
 3. If you see a message like `Failed to build the SAM 2 CUDA extension` during installation, you can ignore it and still use SAM 2 (some post-processing functionality may be limited, but it doesn't affect the results in most cases).
 
 Please see [`INSTALL.md`](./INSTALL.md) for FAQs on potential issues and solutions.
+
+### Use X-Anylabeling
+
+```bash
+mkdir -p $HOME/Projects/Labeling
+
+git clone git@github.com:kzj18/segment-anything-2.git $HOME/Projects/segment-anything-2
+conda env create -f $HOME/Projects/segment-anything-2/environment_x-anylabeling-sam2.yml
+conda activate x-anylabeling-sam2
+
+git clone git@github.com:CVHub520/segment-anything-2.git $HOME/Projects/Labeling/segment-anything-2
+cd $HOME/Projects/Labeling/segment-anything-2
+source /path/to/switch_cuda.sh 12.1
+python setup.py build_ext --inplace
+pip install -e .
+
+git clone git@github.com:CVHub520/X-AnyLabeling.git $HOME/Projects/Labeling/X-AnyLabeling
+pip install -r $HOME/Projects/Labeling/X-AnyLabeling/requirements.txt
+
+cd $HOME/Projects/Labeling/X-AnyLabeling
+python anylabeling/app.py
+```
 
 ## Getting Started
 
